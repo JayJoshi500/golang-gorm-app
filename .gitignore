@@ -1,0 +1,73 @@
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.so.*
+*.dylib
+*.o
+*.a
+*.out
+
+# Test binary, built with `go test -c`
+*.test
+
+# Output of the go coverage tool
+*.out
+coverage.html
+*.cover
+
+# Go workspace file
+go.work
+
+# Dependency directories
+vendor/
+vendor/**
+
+# Go mod files
+go.sum
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+*.iml
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Build output
+bin/
+dist/
+build/
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+
+# OS specific files
+Thumbs.db
+.DS_Store
+._.DS_Store
+._*
+
+# Docker files (optional - uncomment if needed)
+# docker-compose.override.yml
+
+# Protocol Buffer generated files (if not committed)
+# Uncomment these if you don't commit generated .pb.go files
+# **/*.pb.go
+
+# Compiled GraphQL generated files (if regenerating)
+# graphql/generated.go
+# graphql/models_gen.go
