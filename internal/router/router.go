@@ -13,9 +13,14 @@ import (
 	"github.com/go-chi/cors"
 )
 
+type Handlers struct {
+	Auth  *handlers.AuthHandler
+	Resto *handlers.RestoHandler
+}
+
 // New builds the full chi.Mux: global middleware, health check, and the
 // versioned API route tree.
-func New(authHandler *handlers.AuthHandler, logger *slog.Logger) *chi.Mux {
+func New(h Handlers, logger *slog.Logger) *chi.Mux {
 	r := chi.NewRouter()
 
 	// Global middleware, outermost first.
@@ -38,10 +43,16 @@ func New(authHandler *handlers.AuthHandler, logger *slog.Logger) *chi.Mux {
 
 	r.Route("/api/v1", func(api chi.Router) {
 		api.Route("/auth", func(auth chi.Router) {
-			auth.Post("/register", authHandler.Register)
-			auth.Post("/login", authHandler.Login)
-			auth.Post("/logout", authHandler.Logout)
+			auth.Post("/register", h.Auth.Register)
+			auth.Post("/login", h.Auth.Login)
+			auth.Post("/logout", h.Auth.Logout)
 		})
+
+		api.Route("/resto", func(auth chi.Router) {
+			auth.Get("/availableSlots", h.Resto.AvailableSlots)
+			auth.Get("/timingSlots", h.Resto.TimingSlots)
+		})
+
 	})
 
 	return r

@@ -1,12 +1,12 @@
 APP=auth-api
 
-.PHONY: run build test fmt tidy clean docker
+.PHONY: run build test fmt tidy clean docker docker-down
 
 run:
-	go run ./cmd/server
+	go run ./cmd/api
 
 build:
-	go build -o bin/$(APP) ./cmd/server
+	go build -o bin/$(APP) ./cmd/api
 
 test:
 	go test ./... -v
@@ -28,4 +28,7 @@ clean:
 	rm -rf bin
 
 docker:
-	docker build -t $(APP) .
+	docker compose up --build
+
+docker-down:
+	docker compose down

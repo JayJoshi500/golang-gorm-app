@@ -34,7 +34,11 @@ func main() {
 
 	authService := services.NewAuthService(db, cfg.JWTSecret, cfg.JWTExpiryTime)
 	authHandler := handlers.NewAuthHandler(authService, log)
-	r := router.New(authHandler, log)
+
+	restoService := services.NewRestoService(db)
+	restroHandler := handlers.NewRestoHandler(restoService, log)
+
+	r := router.New(router.Handlers{Auth: authHandler, Resto: restroHandler}, log)
 
 	srv := &http.Server{
 		Addr:         ":" + cfg.ServerPort,

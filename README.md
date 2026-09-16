@@ -40,7 +40,7 @@ and a unit test setup — ready to build on.
 ## Prerequisites
 
 - Go 1.22+
-- A running PostgreSQL instance (or `make docker-db` if you have Docker)
+- Docker Desktop, for the containerized API and PostgreSQL setup
 
 ## Setup
 
@@ -60,12 +60,20 @@ go mod tidy   # downloads dependencies and generates go.sum
 ## Running
 
 ```bash
-# start Postgres if you don't already have one:
-make docker-db
-
 make run
 # or: go run ./cmd/api
 ```
+
+To run the API and PostgreSQL together with Docker:
+
+```bash
+docker compose up --build
+```
+
+The API is available at `http://localhost:8080`. Set `API_PORT` to expose it on a
+different host port. PostgreSQL data is stored in the `postgres-data` Docker volume.
+Stop the services with `docker compose down`; add `-v` if you also want to remove the
+database volume.
 
 The API starts on `http://localhost:8080` (configurable via `SERVER_PORT`). Tables are
 auto-migrated on startup.

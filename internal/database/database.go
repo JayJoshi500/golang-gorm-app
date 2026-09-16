@@ -43,5 +43,8 @@ func Connect(cfg *config.Config) (*gorm.DB, error) {
 // development; consider a real migration tool (goose, atlas, etc.) for
 // production schema changes.
 func AutoMigrate(db *gorm.DB) error {
-	return db.AutoMigrate(&models.User{})
+	return db.AutoMigrate(
+		&models.User{}, &models.RestoTimingSlots{}, &models.RestoTables{},
+		&models.Customer{}, &models.Booking{},
+	)
 }

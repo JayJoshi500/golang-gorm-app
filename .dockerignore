@@ -1,0 +1,11 @@
+.git
+.gitignore
+.vscode
+.env
+.env.*
+vendor
+bin
+dist
+build
+*.log
+README.md
